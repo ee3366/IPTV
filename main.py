@@ -124,7 +124,7 @@ def updateChannelUrlsM3U(channels, template_channels):
                             line_number = 1
                             for url in sorted_urls:
                                 if url and url not in written_urls and not any(blacklist in url for blacklist in config.url_blacklist):
-                                    url_suffix = f"$LR•IPV6『线路{line_number}』" if is_ipv6(url) else f"$LR•IPV4『线路{line_number}』"
+                                    url_suffix = f"$IPV6『线路{line_number}』" if is_ipv6(url) else f"$IPV4『线路{line_number}』"
                                     if '$' in url:
                                         base_url = url.split('$', 1)[0]
                                     else:
