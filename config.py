@@ -1,6 +1,7 @@
 ip_version_priority = "ipv6"
 source_urls = [
-    "https://raw.githubusercontent.com/joevess/IPTV/main/sources/iptv_sources.m3u8",
+    "https://www.huichunniao.cn/xh/lib/live.txt",
+    "http://我不是.肥猫.live/TV/tvzb.txt",
     "http://home.jundie.top:81/Cat/tv/live.txt",
     "https://m3u.ibert.me/txt/fmml_dv6.txt",
     "https://m3u.ibert.me/txt/o_cn.txt",
