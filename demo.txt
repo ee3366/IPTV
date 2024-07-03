@@ -17,7 +17,8 @@ CCTV14,
 CCTV15,
 CCTV16,
 CCTV17,
-
+辽宁频道,#genre#
+黑龙江频道,#genre#
 广东频道,#genre#
 海丰,
 珠海,
