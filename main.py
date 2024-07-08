@@ -77,15 +77,12 @@ def match_channels(template_channels, all_channels):
         # 如果共同汉字的数量大于或等于2，则返回True
         return len(common_chars) >= 2
 
-    for category, channel_list in template_channels.items():
-        matched_channels[category] = []
+    for template_category, _ in template_channels.items():
         for online_category, online_channel_list in all_channels.items():
-            for online_channel_name, online_channel_url in online_channel_list:
-                for template_channel_name in channel_list:
-                    # 如果在线频道名称和模板频道名称至少有两个共同汉字，则认为它们匹配
-                    if has_two_common_chinese_chars(online_channel_name, template_channel_name):
-                        matched_channels[category].append((online_channel_name, online_channel_url))
-                        break  # 如果找到匹配，则跳出内层循环
+            # 如果在线分类名称和模板分类名称至少有两个共同汉字，则认为它们匹配
+            if has_two_common_chinese_chars(online_category, template_category):
+                matched_channels[online_category] = online_channel_list
+                break  # 如果找到匹配，则跳出内层循环
 
     return matched_channels
 
