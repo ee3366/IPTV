@@ -68,13 +68,27 @@ def fetch_channels(url):
 def match_channels(template_channels, all_channels):
     matched_channels = OrderedDict()
 
+    def has_two_common_chinese_chars(name1, name2):
+        # 提取两个名称中的汉字
+        chinese_chars_name1 = [char for char in name1 if '\u4e00' <= char <= '\u9fff']
+        chinese_chars_name2 = [char for char in name2 if '\u4e00' <= char <= '\u9fff']
+        # 找出两个名称中共同的汉字
+        common_chars = set(chinese_chars_name1).intersection(set(chinese_chars_name2))
+        # 如果共同汉字的数量大于或等于2，则返回True
+        return len(common_chars) >= 2
+
     for category, channel_list in template_channels.items():
         matched_channels[category] = []
         for online_category, online_channel_list in all_channels.items():
-            if category == online_category:
-                matched_channels[category].extend(online_channel_list)
+            for online_channel_name, online_channel_url in online_channel_list:
+                for template_channel_name in channel_list:
+                    # 如果在线频道名称和模板频道名称至少有两个共同汉字，则认为它们匹配
+                    if has_two_common_chinese_chars(online_channel_name, template_channel_name):
+                        matched_channels[category].append((online_channel_name, online_channel_url))
+                        break  # 如果找到匹配，则跳出内层循环
 
     return matched_channels
+
 
 
 def filter_source_urls(template_file):
