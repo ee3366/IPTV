@@ -69,14 +69,13 @@ def match_channels(template_channels, all_channels):
     matched_channels = OrderedDict()
 
     for category, channel_list in template_channels.items():
-        matched_channels[category] = OrderedDict()
-        for channel_name in channel_list:
-            for online_category, online_channel_list in all_channels.items():
-                for online_channel_name, online_channel_url in online_channel_list:
-                    if channel_name == online_channel_name:
-                        matched_channels[category].setdefault(channel_name, []).append(online_channel_url)
+        matched_channels[category] = []
+        for online_category, online_channel_list in all_channels.items():
+            if category == online_category:
+                matched_channels[category].extend(online_channel_list)
 
     return matched_channels
+
 
 def filter_source_urls(template_file):
     template_channels = parse_template(template_file)
